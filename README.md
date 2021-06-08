@@ -1,4 +1,4 @@
-# # Picovoice SDK for Arduino boards - English language
+# Picovoice SDK for Arduino boards - English language
 
 Made in Vancouver, Canada by [Picovoice](https://picovoice.ai)
 
@@ -8,6 +8,16 @@ Picovoice is an end-to-end platform for building voice products on your terms. I
 - **Reliable:** Runs without needing constant connectivity.
 - **Zero Latency:** Edge-first architecture eliminates unpredictable network delay.
 - **Accurate:** Resilient to noise and reverberation.
+
+## Table of Contents
+
+- [Picovoice SDK for Arduino boards - English language](#picovoice-sdk-for-arduino-boards---english-language)
+  - [Table of Contents](#table-of-contents)
+  - [Compatibility](#compatibility)
+  - [Dependency](#dependency)
+  - [Integration](#integration)
+  - [Create Custom Wake Words & Contexts](#create-custom-wake-words--contexts)
+    - [Import Custom Wake Words & Contexts](#import-custom-wake-words--contexts)
 
 ## Compatibility
 
