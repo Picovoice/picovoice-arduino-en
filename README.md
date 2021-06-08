@@ -85,18 +85,16 @@ if (status != PV_STATUS_SUCCESS) {
 }
 ```
 
-## Create a Custom Wake Word
+## Create Custom Wake Words & Contexts
 
 1. Compile and upload the `Picovoice_EN/GetUUID` sketch from the `File -> Examples` menu. Copy the UUID of the board printed at the beginning of the session to the serial monitor.
 2. Go to [Picovoice Console](https://console.picovoice.ai/) to create models for [Porcupine wake word engine](https://picovoice.ai/docs/quick-start/console-porcupine/) and [Rhino Speech-to-Intent engine](https://picovoice.ai/docs/quick-start/console-rhino/).
-3. Select `Arm Cortex M` as the platform when training the model.
-4. Select `Arduino Nano 33 BLE Sense` as the board type and provide the UUID of the chipset on the board.
-5. Click the train button. The model is now being trained. You will be able to download it within a few hours.
+3. Select `Arm Cortex M` as the platform when training the model, and Select `Arduino Nano 33 BLE Sense` as the board type and provide the UUID of the chipset on the board.
+4. Click the train button. The model is now being trained. You will be able to download it within a few hours.
 
-## Import the Custom Wake Word
+### Import Custom Wake Words & Contexts
 
 1. Download your custom voice model(s) from [Picovoice Console](https://console.picovoice.ai/).
-1. Decompress the zip file. The model file is either `.ppn` for Porcupine wake word or `.rhn` for Rhino context.
-1. Use [binary_to_c_array.py](https://github.com/Picovoice/picovoice/blob/master/resources/scripts/binary_to_c_array.py) to convert your binary models to C array format utilizing the following command:
-`python3 binary_to_c_array.py --binary_file_path input_binary_model --array_file_path output_c_array.txt`
-2. Copy the content of `output_c_array.txt` and update the `keyword_array` and `context_array` values in `params.h`.
+2. Decompress the zip file. The model file is either `.ppn` for Porcupine wake word or `.rhn` for Rhino context.
+3. Use [binary_to_c_array.py](https://github.com/Picovoice/picovoice-arduino-en/blob/master/extras/binary_to_c_array.py) to convert your binary models to C array format utilizing the following command: `python3 binary_to_c_array.py --binary_file_path input_binary_model --array_file_path output_c_array.txt`
+4. Copy the content of `output_c_array.txt` and update the `keyword_array` and `context_array` values.
