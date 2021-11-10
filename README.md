@@ -18,7 +18,7 @@ Picovoice is an end-to-end platform for building voice products on your terms. I
   - [AccessKey](#accesskey)
   - [Integration](#integration)
   - [Create Custom Models](#create-custom-models)
-  - [Import the Custom Models](#import-the-custom-models)
+    - [Import the Custom Models](#import-the-custom-models)
 
 ## Compatibility
 
@@ -119,7 +119,7 @@ if (status != PV_STATUS_SUCCESS) {
 
 The model is now being trained. You will be able to download it within a few hours.
 
-## Import the Custom Models
+### Import the Custom Models
 
 1. Download your custom voice model(s) from [Picovoice Console](https://console.picovoice.ai/).
 2. Decompress the zip file. The model file is either `.ppn` for Porcupine wake word or `.rhn` for Rhino Speech-to-Intent. Both zip archives also contain a `.h` header file containing the `C` array version of the binary model.
