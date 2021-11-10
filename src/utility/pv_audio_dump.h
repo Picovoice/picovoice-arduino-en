@@ -9,30 +9,12 @@
     specific language governing permissions and limitations under the License.
 */
 
-#ifndef PICOVOICE_EN_H
-#define PICOVOICE_EN_H
+#ifndef PV_AUDIO_DUMP_H
+#define PV_AUDIO_DUMP_H
 
-#include <stdint.h>
+void pv_audio_dump_init(void);
+bool pv_audio_dump_add(const int16_t *buffer, uint32_t buffer_size);
+void pv_audio_dump_start(void);
+void pv_audio_dump_reset_buffer(void);
 
-#include "Arduino.h"
-#include "LibPrintf.h"
-
-#include "pv_picovoice.h"
-#include "utility/pv_audio_rec.h"
-
-/**
- * Getter for boards' unique identifier (UUID)
- *
- * @return UUID.
- */
-const uint8_t *pv_get_uuid(void);
-
-
-/**
- * Getter for the size of the UUID.
- *
- * @return size.
- */
-uint32_t pv_get_uuid_size(void);
-
-#endif // PICOVOICE_EN_H
+#endif // PV_AUDIO_DUMP_H
