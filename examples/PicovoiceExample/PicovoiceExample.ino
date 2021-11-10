@@ -15,6 +15,8 @@
 
 #define MEMORY_BUFFER_SIZE (70 * 1024)
 
+static const char* ACCESS_KEY = ... //AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
+
 static pv_picovoice_t *handle = NULL;
 
 static int8_t memory_buffer[MEMORY_BUFFER_SIZE] __attribute__((aligned(16)));
@@ -60,6 +62,7 @@ void setup() {
     }
 
     status = pv_picovoice_init(
+        ACCESS_KEY,
         MEMORY_BUFFER_SIZE,
         memory_buffer,
         sizeof(KEYWORD_ARRAY),
@@ -69,6 +72,7 @@ void setup() {
         sizeof(CONTEXT_ARRAY),
         CONTEXT_ARRAY,
         RHINO_SENSITIVITY,
+        true,
         inference_callback,
         &handle);
     if (status != PV_STATUS_SUCCESS) {

@@ -15,17 +15,28 @@ Picovoice is an end-to-end platform for building voice products on your terms. I
   - [Table of Contents](#table-of-contents)
   - [Compatibility](#compatibility)
   - [Dependency](#dependency)
+  - [AccessKey](#accesskey)
   - [Integration](#integration)
-  - [Create Custom Wake Words & Contexts](#create-custom-wake-words--contexts)
-    - [Import Custom Wake Words & Contexts](#import-custom-wake-words--contexts)
+  - [Create Custom Models](#create-custom-models)
+  - [Import the Custom Models](#import-the-custom-models)
 
 ## Compatibility
 
+* Arduino Portenta H7 + Portenta Vision Shield
 * Arduino Nano 33 BLE Sense
 
 ## Dependency
 
 * LibPrintf
+
+## AccessKey
+
+The Picovoice SDK requires a valid `AccessKey` at initialization. `AccessKey`s act as your credentials when using Picovoice SDKs.
+You can create your `AccessKey` for free. Make sure to keep your `AccessKey` secret.
+
+To obtain your `AccessKey`:
+1. Login or Signup for a free account on the [Picovoice Console](https://picovoice.ai/console/).
+2. Once logged in, go to the [`AccessKey` tab](https://console.picovoice.ai/access_key) to create one or use an existing `AccessKey`.
 
 ## Integration
 
@@ -33,6 +44,8 @@ Picovoice is an end-to-end platform for building voice products on your terms. I
 
 ```c
 #include <Picovoice_EN.h>
+
+static const char* ACCESS_KEY = ... //AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
 
 pv_picovoice_t *handle = NULL;
 
@@ -68,6 +81,7 @@ within [0, 1]. A higher sensitivity reduces miss rate (false reject rate) at cos
 
 ```c
 const pv_status_t status = pv_picovoice_init(
+        ACCESS_KEY,
         MEMORY_BUFFER_SIZE,
         memory_buffer,
         sizeof(keyword_array),
@@ -77,6 +91,7 @@ const pv_status_t status = pv_picovoice_init(
         sizeof(context_array),
         context_array,
         rhino_sensitivity,
+        true,
         inference_callback,
         &handle);
 
@@ -95,16 +110,17 @@ if (status != PV_STATUS_SUCCESS) {
 }
 ```
 
-## Create Custom Wake Words & Contexts
+## Create Custom Models
 
 1. Compile and upload the `Picovoice_EN/GetUUID` sketch from the `File -> Examples` menu. Copy the UUID of the board printed at the beginning of the session to the serial monitor.
 2. Go to [Picovoice Console](https://console.picovoice.ai/) to create models for [Porcupine wake word engine](https://picovoice.ai/docs/quick-start/console-porcupine/) and [Rhino Speech-to-Intent engine](https://picovoice.ai/docs/quick-start/console-rhino/).
-3. Select `Arm Cortex M` as the platform when training the model, and Select `Arduino Nano 33 BLE Sense` as the board type and provide the UUID of the chipset on the board.
-4. Click the train button. The model is now being trained. You will be able to download it within a few hours.
+3. Select `Arm Cortex M` as the platform when training the model.
+4. Select your board type (`Arduino Nano 33 BLE Sense` or `Arduino Portenta H7`) and provide the UUID of the chipset on the board.
 
-### Import Custom Wake Words & Contexts
+The model is now being trained. You will be able to download it within a few hours.
+
+## Import the Custom Models
 
 1. Download your custom voice model(s) from [Picovoice Console](https://console.picovoice.ai/).
-2. Decompress the zip file. The model file is either `.ppn` for Porcupine wake word or `.rhn` for Rhino context.
-3. Use [binary_to_c_array.py](https://github.com/Picovoice/picovoice-arduino-en/blob/master/extras/binary_to_c_array.py) to convert your binary models to C array format utilizing the following command: `python3 binary_to_c_array.py --binary_file_path input_binary_model --array_file_path output_c_array.txt`
-4. Copy the content of `output_c_array.txt` and update the `keyword_array` and `context_array` values.
+2. Decompress the zip file. The model file is either `.ppn` for Porcupine wake word or `.rhn` for Rhino Speech-to-Intent. Both zip archives also contain a `.h` header file containing the `C` array version of the binary model.
+3. Copy the contents of the arrays inside the `.h` header files and update the `KEYWORD_ARRAY` (Porcupine) and `CONTEXT_ARRAY` (Rhino) values in `params.h`.

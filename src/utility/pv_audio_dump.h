@@ -9,30 +9,12 @@
     specific language governing permissions and limitations under the License.
 */
 
-#include <stdint.h>
+#ifndef PV_AUDIO_DUMP_H
+#define PV_AUDIO_DUMP_H
 
-#include "Picovoice_EN.h"
+void pv_audio_dump_init(void);
+bool pv_audio_dump_add(const int16_t *buffer, uint32_t buffer_size);
+void pv_audio_dump_start(void);
+void pv_audio_dump_reset_buffer(void);
 
-#if defined(ARDUINO_ARDUINO_NANO33BLE)
-
-#define UUID_ADDRESS (0x10000060)
-#define UUID_SIZE (8)
-
-#elif defined(ARDUINO_PORTENTA_H7_M7)
-
-#define UUID_ADDRESS (0x1FF1E800)
-#define UUID_SIZE (12)
-
-#else
-
-#error “This library only supports Arduino Nano 33 BLE.”
-
-#endif
-
-const uint8_t *pv_get_uuid(void) {
-    return (const uint8_t *) UUID_ADDRESS;
-}
-
-uint32_t pv_get_uuid_size(void) {
-    return UUID_SIZE;
-}
+#endif // PV_AUDIO_DUMP_H
