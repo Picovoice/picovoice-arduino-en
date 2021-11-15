@@ -45,7 +45,7 @@ To obtain your `AccessKey`:
 ```c
 #include <Picovoice_EN.h>
 
-static const char* ACCESS_KEY = ... //AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
+static const char* ACCESS_KEY = ... //AccessKey string obtained from [Picovoice Console](https://picovoice.ai/console/)
 
 pv_picovoice_t *handle = NULL;
 
