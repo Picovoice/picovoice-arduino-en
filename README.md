@@ -22,8 +22,8 @@ Picovoice is an end-to-end platform for building voice products on your terms. I
 
 ## Compatibility
 
-* Arduino Portenta H7 + Portenta Vision Shield
-* Arduino Nano 33 BLE Sense
+* [Arduino Portenta H7](https://www.arduino.cc/pro/hardware/product/portenta-h7) + [Portenta Vision Shield](https://www.arduino.cc/pro/hardware/product/portenta-vision-shield)
+* [Arduino Nano 33 BLE Sense](https://docs.arduino.cc/hardware/nano-33-ble)
 
 ## Dependency
 
