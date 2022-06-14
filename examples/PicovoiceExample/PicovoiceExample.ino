@@ -72,7 +72,7 @@ void setup() {
         sizeof(CONTEXT_ARRAY),
         CONTEXT_ARRAY,
         RHINO_SENSITIVITY,
-        0.1,
+        1.0,
         true,
         inference_callback,
         &handle);
