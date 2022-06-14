@@ -60,8 +60,8 @@ PV_API void pv_inference_delete(pv_inference_t *inference);
  * Constructor.
  *
  * @param access_key AccessKey obtained from Picovoice Console (https://console.picovoice.ai/).
- * @param memory_size Memory needs to be 8-byte aligned.
- * @param memory_buffer Memory size in bytes.
+ * @param memory_size Memory size in bytes. 
+ * @param memory_buffer Memory needs to be 8-byte aligned.
  * @param keyword_model_size Size of keyword model in bytes.
  * @param keyword_model Keyword model.
  * @param porcupine_sensitivity Wake word detection sensitivity. It should be a number within [0, 1]. A higher
@@ -73,7 +73,13 @@ PV_API void pv_inference_delete(pv_inference_t *inference);
  * intent arguments (slots) within a domain of interest.
  * @param rhino_sensitivity Inference sensitivity. It should be a number within [0, 1]. A higher sensitivity value
  * results in fewer misses at the cost of (potentially) increasing the erroneous inference rate.
- * @param require_endpoint If set to `true`, Rhino requires an endpoint (chunk of silence) before finishing inference.
+ * @param endpoint_duration_sec Endpoint duration in seconds. An endpoint is a chunk of silence at the end of an
+ * utterance that marks the end of spoken command. It should be a positive number within [0.5, 5]. A lower endpoint
+ * duration reduces delay and improves responsiveness. A higher endpoint duration assures Rhino doesn't return inference
+ * pre-emptively in case the user pauses before finishing the request.
+ * @param require_endpoint If set to `true`, Rhino requires an endpoint (a chunk of silence) after the spoken command.
+ * If set to `false`, Rhino tries to detect silence, but if it cannot, it still will provide inference regardless. Set
+ * to `false` only if operating in an environment with overlapping speech (e.g. people talking in the background).
  * @param inference_callback User-defined callback invoked upon completion of intent inference. The callback accepts a
  * single input argument of type `pv_inference_t` that exposes the following immutable fields:
  *         (1) `is_understood` is a flag indicating if the spoken command is understood.
@@ -97,6 +103,7 @@ PV_API pv_status_t pv_picovoice_init(
         int32_t context_model_size,
         const void *context_model,
         float rhino_sensitivity,
+        float endpoint_duration_sec,
         bool require_endpoint,
         void (*inference_callback)(pv_inference_t *),
         pv_picovoice_t **object);
@@ -104,7 +111,7 @@ PV_API pv_status_t pv_picovoice_init(
 /**
  * Destructor.
  *
- * @param object Porcupine object.
+ * @param object Picovoice object.
  */
 PV_API void pv_picovoice_delete(pv_picovoice_t *object);
 
