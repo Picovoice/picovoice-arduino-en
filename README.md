@@ -91,6 +91,7 @@ const pv_status_t status = pv_picovoice_init(
         sizeof(context_array),
         context_array,
         rhino_sensitivity,
+        1.0,
         true,
         inference_callback,
         &handle);
