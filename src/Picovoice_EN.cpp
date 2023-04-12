@@ -18,7 +18,7 @@
 #define UUID_ADDRESS (0x10000060)
 #define UUID_SIZE (8)
 
-#elif defined(ARDUINO_PORTENTA_H7_M7)
+#elif (defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4))
 
 #define UUID_ADDRESS (0x1FF1E800)
 #define UUID_SIZE (12)
