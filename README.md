@@ -10,17 +10,6 @@ similar to Alexa and Google. But it entirely runs 100% on-device. Picovoice is
 - **Zero Latency:** Edge-first architecture eliminates unpredictable network delay.
 - **Accurate:** Resilient to noise and reverberation.
 
-## Table of Contents
-
-- [Picovoice SDK for Arduino boards - German language](#picovoice-sdk-for-arduino-boards---german-language)
-    - [Table of Contents](#table-of-contents)
-    - [Compatibility](#compatibility)
-    - [Dependency](#dependency)
-    - [AccessKey](#accesskey)
-    - [Integration](#integration)
-    - [Create Custom Models](#create-custom-models)
-        - [Import the Custom Models](#import-the-custom-models)
-
 ## Compatibility
 
 * [Arduino Portenta H7](https://www.arduino.cc/pro/hardware/product/portenta-h7) + [Portenta Vision Shield](https://www.arduino.cc/pro/hardware/product/portenta-vision-shield)

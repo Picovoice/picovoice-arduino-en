@@ -35,4 +35,4 @@ const uint8_t *pv_get_uuid(void);
  */
 uint32_t pv_get_uuid_size(void);
 
-#endif // PICOVOICE_DE_H
+#endif // PICOVOICE_EN_H
