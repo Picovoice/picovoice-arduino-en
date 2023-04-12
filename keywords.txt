@@ -1,17 +1,17 @@
 pv_picovoice_t	KEYWORD1
 
-pv_picovoice_init	KEYWORD2
+pv_audio_rec_get_new_buffer	KEYWORD2
 pv_get_uuid	KEYWORD2
 pv_get_uuid_size	KEYWORD2
-pv_audio_rec_get_new_buffer	KEYWORD2
-pv_picovoice_process	KEYWORD2
-pv_status_to_string	KEYWORD2
-pv_sample_rate	KEYWORD2
 pv_inference_delete	KEYWORD2
-pv_picovoice_delete	KEYWORD2
-pv_picovoice_version	KEYWORD2
-pv_picovoice_frame_length	KEYWORD2
 pv_picovoice_context_info	KEYWORD2
+pv_picovoice_delete	KEYWORD2
+pv_picovoice_frame_length	KEYWORD2
+pv_picovoice_init	KEYWORD2
+pv_picovoice_process	KEYWORD2
+pv_picovoice_version	KEYWORD2
+pv_sample_rate	KEYWORD2
+pv_status_to_string	KEYWORD2
 
 pv_inference_t	KEYWORD3
 

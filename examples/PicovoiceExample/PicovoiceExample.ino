@@ -1,5 +1,5 @@
 /*
-    Copyright 2021 Picovoice Inc.
+    Copyright 2021-2023 Picovoice Inc.
 
     You may not use this file except in compliance with the license. A copy of the license is located in the "LICENSE"
     file accompanying this source.
@@ -15,7 +15,7 @@
 
 #define MEMORY_BUFFER_SIZE (70 * 1024)
 
-static const char* ACCESS_KEY = ... //AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
+static const char* ACCESS_KEY = "${ACCESS_KEY}"; //AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
 
 static pv_picovoice_t *handle = NULL;
 
@@ -23,6 +23,8 @@ static int8_t memory_buffer[MEMORY_BUFFER_SIZE] __attribute__((aligned(16)));
 
 static const float PORCUPINE_SENSITIVITY = 0.75f;
 static const float RHINO_SENSITIVITY = 0.5f;
+static const float RHINO_ENDPOINT_DURATION_SEC = 1.0f;
+static const bool RHINO_REQUIRE_ENDPOINT = true;
 
 static void wake_word_callback(void) {
     Serial.println("Wake word detected!");
@@ -62,20 +64,20 @@ void setup() {
     }
 
     status = pv_picovoice_init(
-        ACCESS_KEY,
-        MEMORY_BUFFER_SIZE,
-        memory_buffer,
-        sizeof(KEYWORD_ARRAY),
-        KEYWORD_ARRAY,
-        PORCUPINE_SENSITIVITY,
-        wake_word_callback,
-        sizeof(CONTEXT_ARRAY),
-        CONTEXT_ARRAY,
-        RHINO_SENSITIVITY,
-        1.0,
-        true,
-        inference_callback,
-        &handle);
+            ACCESS_KEY,
+            MEMORY_BUFFER_SIZE,
+            memory_buffer,
+            sizeof(KEYWORD_ARRAY),
+            KEYWORD_ARRAY,
+            PORCUPINE_SENSITIVITY,
+            wake_word_callback,
+            sizeof(CONTEXT_ARRAY),
+            CONTEXT_ARRAY,
+            RHINO_SENSITIVITY,
+            RHINO_ENDPOINT_DURATION_SEC,
+            RHINO_REQUIRE_ENDPOINT,
+            inference_callback,
+            &handle);
     if (status != PV_STATUS_SUCCESS) {
         Serial.print("Picovoice init failed with ");
         Serial.println(pv_status_to_string(status));
@@ -89,7 +91,7 @@ void setup() {
         Serial.println(pv_status_to_string(status));
         while (1);
     }
-    Serial.println("Wake word: Picovoice");
+    Serial.println("Wake word: 'hey computer'");
     Serial.println(rhino_context);
 }
 
