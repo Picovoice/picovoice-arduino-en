@@ -12,12 +12,12 @@ similar to Alexa and Google. But it entirely runs 100% on-device. Picovoice is
 
 ## Compatibility
 
-* [Arduino Portenta H7](https://www.arduino.cc/pro/hardware/product/portenta-h7) + [Portenta Vision Shield](https://www.arduino.cc/pro/hardware/product/portenta-vision-shield)
-* [Arduino Nano 33 BLE Sense](https://docs.arduino.cc/hardware/nano-33-ble)
+- [Arduino Portenta H7](https://www.arduino.cc/pro/hardware/product/portenta-h7) + [Portenta Vision Shield](https://www.arduino.cc/pro/hardware/product/portenta-vision-shield)
+- [Arduino Nano 33 BLE Sense](https://docs.arduino.cc/hardware/nano-33-ble)
 
 ## Dependency
 
-* LibPrintf
+- LibPrintf
 
 ## AccessKey
 
