@@ -15,7 +15,7 @@
 
 #define MEMORY_BUFFER_SIZE (70 * 1024)
 
-static const char* ACCESS_KEY = "${ACCESS_KEY}"; //AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
+static const char *ACCESS_KEY = "${ACCESS_KEY}"; // AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
 
 static pv_picovoice_t *handle = NULL;
 
@@ -52,6 +52,12 @@ static void inference_callback(pv_inference_t *inference) {
     pv_inference_delete(inference);
 }
 
+static void print_error_message(char **message_stack, int32_t message_stack_depth) {
+    for (int32_t i = 0; i < message_stack_depth; i++) {
+        Serial.println(message_stack[i]);
+    }
+}
+
 void setup() {
     Serial.begin(9600);
     while (!Serial);
@@ -63,24 +69,37 @@ void setup() {
         while (1);
     }
 
+    char **message_stack = NULL;
+    int32_t message_stack_depth = 0;
+    pv_status_t error_status;
+
     status = pv_picovoice_init(
-            ACCESS_KEY,
-            MEMORY_BUFFER_SIZE,
-            memory_buffer,
-            sizeof(KEYWORD_ARRAY),
-            KEYWORD_ARRAY,
-            PORCUPINE_SENSITIVITY,
-            wake_word_callback,
-            sizeof(CONTEXT_ARRAY),
-            CONTEXT_ARRAY,
-            RHINO_SENSITIVITY,
-            RHINO_ENDPOINT_DURATION_SEC,
-            RHINO_REQUIRE_ENDPOINT,
-            inference_callback,
-            &handle);
+        ACCESS_KEY,
+        MEMORY_BUFFER_SIZE,
+        memory_buffer,
+        sizeof(KEYWORD_ARRAY),
+        KEYWORD_ARRAY,
+        PORCUPINE_SENSITIVITY,
+        wake_word_callback,
+        sizeof(CONTEXT_ARRAY),
+        CONTEXT_ARRAY,
+        RHINO_SENSITIVITY,
+        RHINO_ENDPOINT_DURATION_SEC,
+        RHINO_REQUIRE_ENDPOINT,
+        inference_callback,
+        &handle);
     if (status != PV_STATUS_SUCCESS) {
         Serial.print("Picovoice init failed with ");
         Serial.println(pv_status_to_string(status));
+
+        error_status = pv_get_error_stack(&message_stack, &message_stack_depth);
+        if (error_status != PV_STATUS_SUCCESS) {
+            Serial.println("Unable to get Porcupine error state");
+            while (1);
+        }
+        print_error_message(message_stack, message_stack_depth);
+        pv_free_error_stack(message_stack);
+
         while (1);
     }
 
@@ -95,15 +114,23 @@ void setup() {
     Serial.println(rhino_context);
 }
 
-void loop()
-{
+void loop() {
     const int16_t *buffer = pv_audio_rec_get_new_buffer();
     if (buffer) {
         const pv_status_t status = pv_picovoice_process(handle, buffer);
         if (status != PV_STATUS_SUCCESS) {
             Serial.print("Picovoice process failed with ");
             Serial.println(pv_status_to_string(status));
-            while(1);
+            char **message_stack = NULL;
+            int32_t message_stack_depth = 0;
+            pv_get_error_stack(
+                &message_stack,
+                &message_stack_depth);
+            for (int32_t i = 0; i < message_stack_depth; i++) {
+                Serial.println(message_stack[i]);
+            }
+            pv_free_error_stack(message_stack);
+            while (1);
         }
     }
 }

@@ -12,6 +12,7 @@ pv_picovoice_process	KEYWORD2
 pv_picovoice_version	KEYWORD2
 pv_sample_rate	KEYWORD2
 pv_status_to_string	KEYWORD2
+pv_get_error_stack KEYWORD2
 
 pv_inference_t	KEYWORD3
 
