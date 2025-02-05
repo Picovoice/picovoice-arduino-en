@@ -12,7 +12,6 @@ similar to Alexa and Google. But it entirely runs 100% on-device. Picovoice is
 
 ## Compatibility
 
-- [Arduino Portenta H7](https://www.arduino.cc/pro/hardware/product/portenta-h7) + [Portenta Vision Shield](https://www.arduino.cc/pro/hardware/product/portenta-vision-shield)
 - [Arduino Nano 33 BLE Sense](https://docs.arduino.cc/hardware/nano-33-ble)
 
 ## Dependency
@@ -120,7 +119,7 @@ if (status != PV_STATUS_SUCCESS) {
    for [Porcupine wake word engine](https://picovoice.ai/docs/quick-start/console-porcupine/)
    and [Rhino Speech-to-Intent engine](https://picovoice.ai/docs/quick-start/console-rhino/).
 3. Select `Arm Cortex M` as the platform when training the model.
-4. Select your board type (`Arduino Nano 33 BLE Sense` or `Arduino Portenta H7`) and provide the UUID of the chipset on
+4. Select your board type (`Arduino Nano 33 BLE Sense`) and provide the UUID of the chipset on
    the board.
 
 The model is now being trained. You will be able to download it within a few hours.
